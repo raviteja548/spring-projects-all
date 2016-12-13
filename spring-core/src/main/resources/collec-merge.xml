@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+">
+
+
+	<bean id="par-triangle" class="collection.merge.Triangle" abstract="true">
+		<property name="points">
+			<list>
+				<ref bean= "pointA"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="chi-triangle" class="collection.merge.Triangle" parent="par-triangle">
+		<property name="points">
+			<list merge="true">
+				<ref bean= "pointB"/>
+					<ref bean= "pointC"/>
+			</list>
+		</property>
+	</bean>
+
+
+
+	<bean id="pointA" class="collection.merge.Point">
+		<property name="x" value="0" />
+		<property name="y" value="20" />
+	</bean>
+
+	<bean id="pointB" class="collection.merge.Point">
+		<property name="x" value="40" />
+		<property name="y" value="0" />
+	</bean>
+
+
+	<bean id="pointC" class="collection.merge.Point">
+		<property name="x" value="21" />
+		<property name="y" value="45" />
+	</bean>
+	
+	<bean class="collection.merge.DisplayNameBeanPostProcessor"/>
+</beans>

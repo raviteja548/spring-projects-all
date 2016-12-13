@@ -1,0 +1,23 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-4.0.xsd ">
+
+    <aop:aspectj-autoproxy/>
+
+    <bean id="triangle" class="com.aop.model.Triangle">
+        <property name="name" value="Equilateral Triangle"/>
+    </bean>
+
+    <bean id="circle" class="com.aop.model.Circle">
+        <property name="name" value="Circum Circle"/>
+    </bean>
+
+    <bean id="shapeService" class="com.aop.service.ShapeService" autowire="byName"/>
+
+    <bean id="loggingAspect" class="com.aop.aspect.LogginAspect"/>
+    </beans>
