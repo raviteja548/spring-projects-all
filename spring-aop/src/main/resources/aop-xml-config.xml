@@ -1,0 +1,49 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd ">
+
+    <!--<aop:aspectj-autoproxy/>
+    <context:component-scan base-package="com.customadvice"/>-->
+
+    <bean id="triangle" class="com.xmlconfig.model.Triangle">
+        <property name="name" value="triangle"/>
+    </bean>
+
+    <bean id="circle" class="com.xmlconfig.model.Circle">
+        <property name="name" value="circle" />
+    </bean>
+
+    <bean id="shapeService" class="com.xmlconfig.service.ShapeService">
+        <property name="circle" ref="circle"/>
+        <property name="triangle" ref="triangle"/>
+    </bean>
+
+    <bean id="loggingAspect" class="com.xmlconfig.aspect.LogginAspect"/>
+
+    <!--
+
+    <aop:config>
+        <aop:aspect id="logginAspect" ref="loggingAspect">
+            <aop:pointcut id="allGetters" expression="execution(* get*())"/>
+            <aop:around method="aroundAdvice" pointcut-ref="allGetters"/>
+        </aop:aspect>
+    </aop:config>
+
+    -->
+
+    <!--  use either of configurations -->
+    <aop:config>
+        <aop:aspect id="logginAspect" ref="loggingAspect"><!-- equal as @Aspect -->
+            <aop:around pointcut="execution(* get*())" method="aroundAdvice"/>
+        </aop:aspect>
+    </aop:config>
+
+
+    </beans>
