@@ -6,18 +6,18 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Component
-public class EmployeeServiceImpl implements EmployeeService {
+public class DeptServiceImpl implements DeptService {
 
 	@Autowired
-	private EmployeeDao employeeDao;
+	private DeptDao deptDao;
 
-	@Autowired
-	private DeptService deptService;
-
-	@Transactional(propagation = Propagation.REQUIRED)
-	public boolean createEmployee() {
-		employeeDao.insertEmployee();
-		deptService.createDept();
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
+	public boolean createDept() {
+		try{
+		deptDao.insertDepartment();
+		}catch(Exception e){
+			System.out.println(e.getStackTrace().toString());
+		}
 		return true;
 	}
 
